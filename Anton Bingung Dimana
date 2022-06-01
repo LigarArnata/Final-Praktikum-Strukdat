@@ -1,0 +1,54 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <deque>
+
+using namespace std;
+
+void printDeque(deque<string> q) {
+    int flag = q.size() - 1;
+    while (!q.empty()){
+        cout << q.front();
+        if (flag--)
+            cout << "/";
+
+        q.pop_front();
+    }
+    cout<<endl;
+}
+
+int main() {
+    deque<string> string_deque;
+    int n;
+    cin >> n;
+
+    string_deque.push_front("home");
+    string_deque.push_back("anton");
+
+
+    while (n--) {
+        string command, name;
+        cin >> command;
+        if (command == "goto") {
+            cin >> name;
+            string_deque.push_back(name);
+        } else if (command == "whereami") {
+            if (!string_deque.empty())
+                printDeque(string_deque);
+            else {
+                cout << "i am nowhere" << endl;
+            }
+        } else if (command == "goback") {
+            if (!string_deque.empty())
+                string_deque.pop_back();
+            else
+                cout << "cannot go back" << endl;
+        } else {
+            cout << "Query not found" << endl;
+        }
+    }
+    return 0;
+}
+
